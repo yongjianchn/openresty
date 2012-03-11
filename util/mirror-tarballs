@@ -30,24 +30,30 @@ cp $root/patches/nginx-$main_ver-server_header.patch server_header.patch || exit
 sed $"s/NGINX_VERSION \".unknown\"/NGINX_VERSION \".$minor_ver\"/" server_header.patch \
     > server_header.patch.tmp && mv -f server_header.patch.tmp server_header.patch || exit 1
 
+echo server_header.patch
 patch -p2 < server_header.patch || exit 1
 
 #patch -p1 < $root/patches/nginx-$main_ver-redirect_memcpy_overlap.patch || exit 1
 
+echo no_error_pages.patch
 patch -p1 < $root/patches/nginx-$main_ver-no_error_pages.patch || exit 1
 
+echo no_Werror.patch
 patch -p1 < $root/patches/nginx-$main_ver-no_Werror.patch || exit 1
 
-patch -p1 < $root/patches/nginx-$main_ver-epoll_check_stale_wev.patch || exit 1
+#echo epoll_check_stale_wev.patch
+#patch -p1 < $root/patches/nginx-$main_ver-epoll_check_stale_wev.patch || exit 1
 
 #patch -p1 < $root/patches/nginx-$main_ver-request_body_in_single_buf.patch || exit 1
 
-echo "INFO: applying the max_subrequests patch...";
+echo max_subrequests.patch
 patch -p1 < $root/patches/nginx-$main_ver-max_subrequests.patch || exit 1
 
-patch -p1 -l < $root/patches/nginx-$main_ver-subrequest_loop.patch || exit 1
+#echo subrequest_loop.patch
+#patch -p1 -l < $root/patches/nginx-$main_ver-subrequest_loop.patch || exit 1
 
-patch -p1 -l < $root/patches/nginx-$main_ver-gzip_empty_flush_buf.patch || exit 1
+#echo gzip_empty_flush_buf.patch
+#patch -p1 -l < $root/patches/nginx-$main_ver-gzip_empty_flush_buf.patch || exit 1
 
 #patch -p1 < $root/patches/nginx-$main_ver-variable_header_ignore_no_hash.patch || exit 1
 
