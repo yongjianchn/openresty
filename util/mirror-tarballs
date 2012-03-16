@@ -63,6 +63,9 @@ patch -p1 < $root/patches/nginx-$main_ver-allow_request_body_updating.patch || e
 
 patch -p1 < $root/patches/nginx-$main_ver-log_escape_non_ascii.patch || exit 1
 
+echo "INFO: applying null-character-fixes patch"
+patch -p0 < $root/patches/nginx-$main_ver-null_character_fixes.patch || exit 1
+
 #patch -p1 < $root/patches/nginx-$main_ver-gzip_ok_invalid_read_fix.patch || exit 1
 
 rm -f *.patch || exit 1
@@ -120,7 +123,7 @@ mv chaoslawful-drizzle-nginx-module-* drizzle-nginx-module-$ver || exit 1
 
 #################################
 
-ver=0.5.0rc17
+ver=0.5.0rc19
 $root/util/get-tarball "http://github.com/chaoslawful/lua-nginx-module/tarball/v$ver" -O lua-nginx-module-$ver.tar.gz || exit 1
 tar -xzf lua-nginx-module-$ver.tar.gz || exit 1
 mv chaoslawful-lua-nginx-module-* ngx_lua-$ver || exit 1
@@ -141,7 +144,7 @@ mv agentzh-memc-nginx-module-* memc-nginx-module-$ver || exit 1
 
 #################################
 
-ver=0.13rc3
+ver=0.13rc5
 $root/util/get-tarball "http://github.com/agentzh/srcache-nginx-module/tarball/v$ver" -O srcache-nginx-module-$ver.tar.gz || exit 1
 tar -xzf srcache-nginx-module-$ver.tar.gz || exit 1
 mv agentzh-srcache-nginx-module-* srcache-nginx-module-$ver || exit 1
